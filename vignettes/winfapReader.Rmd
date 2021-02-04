@@ -11,6 +11,14 @@ vignette: >
 ---
 
 
+```{r,echo=FALSE,eval=TRUE}
+# if(!(any(rownames(installed.packages()) == "rnrfa"))) install.packages("rnrfa")
+# if(!(any(rownames(installed.packages()) == "utf8"))) install.packages("utf8")
+library(rnrfa)
+library(utf8)
+```
+
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -32,7 +40,7 @@ Consequently, the NRFA publishes and routinely updates files which are suitable 
 The `winfapReader` package allows you to read into your R session the `.AM`, `.CD3` and`.PT` files. Importantly it is aware of the typical structure of the files in which rejected annual maxima and missing period of records for the  peaks over threshold are recorded, and merges this information with the flow records. This allows the user to have all useful information to decide which parts of the record to include in the analysis. 
 
 Recently the NRFA has developed an [API](https://nrfa.ceh.ac.uk/news-and-media/news/nrfa-releases-api-improve-data-access) which allows for a programmatic interaction with their datasets: the information about annual maxima, catchment descriptors and peaks over threshold can also be retrieved using this API. 
-Beside the information on extremes for flood frequency estimation the NRFA maintains and distributes daily river flow records and several other river flow related variables, such as catchment averaged rainfall: the [`rnrfa`](https://cran.r-project.org/package=rnrfa) package allows one to retrieve these information and more with its `rnrfa::get_ts` function (see more on this at the end of the vignette). The `winfapReader` package focuses only on handling river flow extremes information and has two sets of functions: 
+Beside the information on extremes for flood frequency estimation the NRFA maintains and distributes daily river flow records and several other river flow related variables, such as catchment averaged rainfall: the [`rnrfa`](https://cran.r-project.org/package=rnrfa) package allows one to retrieve these information and more with its `rnrfa::gdf` and `rnrfa::get_ts` functions (see more on this at the end of the vignette). The `winfapReader` package focuses only on handling river flow extremes information and has two sets of functions: 
 
 + the `read_amax`, `read_cd3` and `read_pot` functions read the information from the `.AM`, `.CD3` and `.PT` files *once these have been downloaded into a local folder*
 
@@ -148,10 +156,11 @@ rivLanc <- rnrfa::catalogue(bbox = list(lat_min = 54.04-0.2, lat_max = 54.04+0.2
                                        lon_min = -2.8-0.2, lon_max = -2.8+0.2))
 ### let's select stations which have been deemed to be suitable for pooling
 ### that's the highest quality flag for annual maxima 
-table(rivLanc$`feh-pooling`) ### 5 stations are suitable for pooling
-rivLanc[rivLanc$`feh-pooling`,1:3]
+table(rivLanc[,"feh-pooling"]) ### 5 stations are suitable for pooling
+rivLanc <- subset(rivLanc,subset = as.vector(rivLanc[,"feh-pooling",drop=TRUE]))
+rivLanc[,1:3]
 ### notice that rnrfa outputs a tibble and not a data.frame
-idLanc <- unlist(rivLanc[rivLanc$`feh-pooling`,"id"]) ## a vector of ids
+idLanc <- rivLanc[,"id",drop=TRUE] ## a vector of ids
 amaxLanc <- winfapReader::get_amax(idLanc)
 names(amaxLanc)
 ```

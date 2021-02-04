@@ -1,3 +1,9 @@
+## ----echo=FALSE,eval=TRUE-----------------------------------------------------
+# if(!(any(rownames(installed.packages()) == "rnrfa"))) install.packages("rnrfa")
+# if(!(any(rownames(installed.packages()) == "utf8"))) install.packages("utf8")
+library(rnrfa)
+library(utf8)
+
 ## ---- include = FALSE---------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -62,10 +68,11 @@ rivLanc <- rnrfa::catalogue(bbox = list(lat_min = 54.04-0.2, lat_max = 54.04+0.2
                                        lon_min = -2.8-0.2, lon_max = -2.8+0.2))
 ### let's select stations which have been deemed to be suitable for pooling
 ### that's the highest quality flag for annual maxima 
-table(rivLanc$`feh-pooling`) ### 5 stations are suitable for pooling
-rivLanc[rivLanc$`feh-pooling`,1:3]
+table(rivLanc[,"feh-pooling"]) ### 5 stations are suitable for pooling
+rivLanc <- subset(rivLanc,subset = as.vector(rivLanc[,"feh-pooling",drop=TRUE]))
+rivLanc[,1:3]
 ### notice that rnrfa outputs a tibble and not a data.frame
-idLanc <- unlist(rivLanc[rivLanc$`feh-pooling`,"id"]) ## a vector of ids
+idLanc <- rivLanc[,"id",drop=TRUE] ## a vector of ids
 amaxLanc <- winfapReader::get_amax(idLanc)
 names(amaxLanc)
 
