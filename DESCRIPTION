@@ -1,7 +1,7 @@
 Package: winfapReader
 Type: Package
 Title: Interact with Peak Flow Data in the United Kingdom
-Version: 0.1-2
+Version: 0.1-3
 Authors@R: c(person("Ilaria", "Prosdocimi", 
                     email = "prosdocimi.ilaria@gmail.com",
                     role = c("aut", "cre"),
@@ -24,9 +24,9 @@ VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: no
-Packaged: 2021-02-04 08:10:44 UTC; ilaria
+Packaged: 2021-02-19 08:42:14 UTC; ilaria
 Author: Ilaria Prosdocimi [aut, cre] (<https://orcid.org/0000-0001-8565-094X>),
   Luke Shaw [aut] (Luke developped the code to handle the missing and gap
     periods for Peaks over threshold records.)
 Repository: CRAN
-Date/Publication: 2021-02-04 08:30:03 UTC
+Date/Publication: 2021-02-19 09:30:02 UTC
