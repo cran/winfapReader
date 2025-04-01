@@ -3,17 +3,19 @@
 #'
 #' @param date the (vector of) dates for which the water year will be calculated
 #' @param start_month the month in which the water year starts, default is October
-#'
 #' @return The water year value
 #' @export
-#'
-#' @examples water_year(as.Date(c("2010-11-03", "2013-02-03")))
+#' @examples
+#' \dontrun{
+#' water_year(as.Date(c("2010-11-03", "2013-02-03")))
+#' }
 #' @importFrom lubridate month
 #' @importFrom utils read.csv
 #' @importFrom lubridate year
 #' @importFrom lubridate leap_year
 #' @importFrom lubridate dmy
 #' @importFrom lubridate ymd
+#' @importFrom lubridate ymd_hms
 #' @importFrom lubridate date
 #' @importFrom lubridate int_overlaps
 #' @importFrom lubridate interval
