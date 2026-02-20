@@ -1,7 +1,7 @@
 Package: winfapReader
 Type: Package
 Title: Interact with Peak Flow Data in the United Kingdom
-Version: 0.1-6
+Version: 0.1-7
 Authors@R: c(person("Ilaria", "Prosdocimi", 
                     email = "prosdocimi.ilaria@gmail.com",
                     role = c("aut", "cre"),
@@ -15,18 +15,19 @@ BugReports: https://github.com/ilapros/winfapReader/issues
 Description: Obtain information on peak flow data from the National River Flow Archive (NRFA) in the United Kingdom, either from the Peak Flow Dataset files <https://nrfa.ceh.ac.uk/data/peak-flow-dataset> once these have been downloaded to the user's computer or using the NRFA's API. These files are in a format suitable for direct use in the 'WINFAP' software, hence the name of the package. 
 License: GPL-3
 Imports: lubridate
-Depends: utils, R (>= 3.5.0)
-Suggests: testthat, utf8, rnrfa, httr, jsonlite, curl, knitr,
+Depends: utils, R (>= 4.1)
+Suggests: testthat, utf8, rnrfa, httr2, curl (>= 6.4.0), knitr,
         rmarkdown, zoo
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Encoding: UTF-8
 Language: en-GB
 NeedsCompilation: no
-Packaged: 2025-04-01 06:56:16 UTC; ilari
-Author: Ilaria Prosdocimi [aut, cre] (<https://orcid.org/0000-0001-8565-094X>),
+Packaged: 2026-02-20 10:46:14 UTC; ilari
+Author: Ilaria Prosdocimi [aut, cre] (ORCID:
+    <https://orcid.org/0000-0001-8565-094X>),
   Luke Shaw [aut] (Luke developped the code to handle the missing and gap
     periods for Peaks over threshold records.)
 Repository: CRAN
-Date/Publication: 2025-04-01 07:30:02 UTC
+Date/Publication: 2026-02-20 11:30:02 UTC

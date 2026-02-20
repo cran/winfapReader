@@ -1,9 +1,9 @@
 ## ----echo=FALSE---------------------------------------------------------------
 isRNRFA <- requireNamespace("rnrfa", quietly = TRUE)
 isZOO <- requireNamespace("zoo", quietly = TRUE)
-isHTTR <- requireNamespace("httr", quietly = TRUE)
+isHTTR2 <- requireNamespace("httr2", quietly = TRUE)
 isUTF8 <- requireNamespace("utf8", quietly = TRUE)
-is1 <- (isHTTR & isUTF8)
+is1 <- (isHTTR2 & isUTF8)
 is2 <- (is1 & isRNRFA & isZOO)
 
 ## ----echo=FALSE,eval=isUTF8---------------------------------------------------
@@ -19,13 +19,14 @@ knitr::opts_chunk$set(
 ## ----setup--------------------------------------------------------------------
 library(winfapReader)
 ### the get_* functions only works once you are connected to the internet
-### they also need one to have the library httr installed 
-### verify if you have the library with (!requireNamespace("httr", quietly = TRUE)) 
+### they also need one to have the library httr2 installed 
+### verify if you have the library with (!requireNamespace("httr2", quietly = TRUE)) 
 ### if FALSE install it with 
-### install.packages("httr")
+### install.packages("httr2")
 
 ## ----showAmax, eval=is1-------------------------------------------------------
 if(curl::has_internet()) amaxEx <- get_amax(c(42003,72014)) 
+if(!curl::has_internet()) amaxEx <- NULL
 names(amaxEx); class(amaxEx)
 # let's look at only one of these
 a42003 <- amaxEx[["42003"]]
@@ -34,6 +35,7 @@ head(a42003)
 
 ## ----showPOT, eval=is1--------------------------------------------------------
 if(curl::has_internet()) potEx <- get_pot(c(42003,72014)) 
+if(!curl::has_internet()) potEx <- NULL
 names(potEx); class(potEx)
 # let's look at only one of these
 p42003 <- potEx[["42003"]]
@@ -56,6 +58,7 @@ head(p42003withAmax$WaterYearInfo, 10)
 
 ## ----showCD, eval=is1---------------------------------------------------------
 if(curl::has_internet()) cdEx <- get_cd(c(42003,72014)) 
+if(!curl::has_internet()) cdEx <- NULL
 names(cdEx); class(cdEx)
 # let's look at only one of these
 c42003 <- cdEx[["42003"]]
@@ -64,6 +67,7 @@ class(c42003); names(c42003)
 
 ## ----showCDall, eval=is1------------------------------------------------------
 if(curl::has_internet()) cd42003all <- get_cd(42003, fields = "all") 
+if(!curl::has_internet()) cd42003all <- NULL
 names(cd42003all)
 
 ## ----eval=is2-----------------------------------------------------------------
